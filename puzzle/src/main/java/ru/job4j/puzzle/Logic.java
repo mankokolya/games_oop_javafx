@@ -71,6 +71,36 @@ public class Logic {
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
+        for (int i = 0; i < table.length; i++) {
+            if (table[i][i] == 1) {
+                if (checkHorizontalLineIsUnique(table, i) || checkVerticalLineISUnique(table, i)) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    public static boolean checkHorizontalLineIsUnique(int[][] board, int row) {
+        boolean result = true;
+        for (int i = 0; i < board.length; i++) {
+            if (board[row][i] != 1) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public static boolean checkVerticalLineISUnique(int[][] board, int column) {
+        boolean result = true;
+        for (int[] moves : board) {
+            if (moves[column] != 1) {
+                result = false;
+                break;
+            }
+        }
         return result;
     }
 
