@@ -73,7 +73,7 @@ public class Logic {
         boolean result = false;
         for (int i = 0; i < table.length; i++) {
             if (table[i][i] == 1) {
-                if (checkHorizontalLineIsUnique(table, i) || checkVerticalLineISUnique(table, i)) {
+                if (checkHorizontalLineHasOnly1(table, i) || checkVerticalLineHasOnly1(table, i)) {
                     result = true;
                     break;
                 }
@@ -82,7 +82,7 @@ public class Logic {
         return result;
     }
 
-    public static boolean checkHorizontalLineIsUnique(int[][] board, int row) {
+    public static boolean checkHorizontalLineHasOnly1(int[][] board, int row) {
         boolean result = true;
         for (int i = 0; i < board.length; i++) {
             if (board[row][i] != 1) {
@@ -93,10 +93,10 @@ public class Logic {
         return result;
     }
 
-    public static boolean checkVerticalLineISUnique(int[][] board, int column) {
+    public static boolean checkVerticalLineHasOnly1(int[][] board, int column) {
         boolean result = true;
-        for (int[] moves : board) {
-            if (moves[column] != 1) {
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][column] != 1) {
                 result = false;
                 break;
             }
