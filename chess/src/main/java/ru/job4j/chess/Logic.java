@@ -23,29 +23,32 @@ public class Logic {
 
     public boolean move(Cell source, Cell dest) {
         boolean rst = false;
-        int index = this.findBy(source);
-        if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                for (Cell cell : steps) {
-                    for (int i = 0; i < this.index ; i++) {
-                        if (this.figures[i].position().equals(cell)) {
-                            return false;
-                        }
-                    }
+        try {
+            int index = this.findBy(source);
+            if (index != -1) {
+                Cell[] steps = this.figures[index].way(source, dest);
+                if (steps.length > 0 && steps[steps.length - 1].equals(dest) && isWayFree(steps)) {
+                    rst = true;
+                    this.figures[index] = this.figures[index].copy(dest);
                 }
             }
-            rst = true;
-            this.figures[index] = this.figures[index].copy(dest);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return rst;
     }
 
-    public void clean() {
-        for (int position = 0; position != this.figures.length; position++) {
-            this.figures[position] = null;
+    private boolean isWayFree(Cell[] way) {
+        for (Cell cell : way) {
+            if(findBy(cell) != -1) {
+                return false;
+            }
         }
-        this.index = 0;
+        return true;
+    }
+
+    public void clean() {
+        Arrays.fill(this.figures, null);
     }
 
     private int findBy(Cell cell) {

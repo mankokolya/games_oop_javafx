@@ -24,38 +24,18 @@ public class BishopBlack implements Figure {
         }
         int size = dest.y - source.y;
         Cell[] steps = new Cell[size];
-        int deltaX = findDeltaX(source.x, dest.x);
-        int deltaY = findDeltaY(source.y, dest.y);
+        int deltaX = Integer.compare(dest.x, source.x);
+        int deltaY = Integer.compare(dest.y, source.y);
         for (int i = 0; i < size; i++) {
-            int x = i + deltaX + source.x;
-            int y = i + deltaY;
+            int x = source.x + (i + 1) * deltaX;
+            int y = source.y + (i + 1) * deltaY;
             steps[i] = Cell.findBy(x, y);
         }
         return steps;
     }
 
-    private int findDeltaY(int sourceY, int destY) {
-        int deltaY = -1;
-        if (destY - sourceY >= 0) {
-            deltaY = 1;
-        }
-        return deltaY;
-    }
-
-    private int findDeltaX(int sourceX, int destX) {
-        int deltaX = -1;
-        if (destX - sourceX >= 0) {
-            deltaX = 1;
-        }
-        return deltaX;
-    }
-
     public boolean isDiagonal(Cell source, Cell dest) {
-        boolean diagonal = true;
-        if (dest.x - source.x == 0 || dest.y - source.y == 0) {
-            diagonal = false;
-        }
-        return diagonal;
+        return Math.abs(dest.x - source.x) == Math.abs(dest.y - source.y);
     }
 
     @Override
