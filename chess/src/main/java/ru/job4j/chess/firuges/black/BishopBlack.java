@@ -22,7 +22,7 @@ public class BishopBlack implements Figure {
                     String.format("Could not way by diagonal from %s to %s", source, dest)
             );
         }
-        int size = dest.y - source.y;
+        int size = Math.abs(dest.y - source.y);
         Cell[] steps = new Cell[size];
         int deltaX = Integer.compare(dest.x, source.x);
         int deltaY = Integer.compare(dest.y, source.y);

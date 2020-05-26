@@ -22,6 +22,11 @@ public class BishopBlackTest {
     }
 
     @Test
+    public void testWayDestLessSource() {
+        assertThat(bishopBlack.way(Cell.D4, Cell.A1), is(new Cell[]{Cell.C3, Cell.B2, Cell.A1}));
+    }
+
+    @Test
     public void testNotDiagonalY() {
         assertThat(bishopBlack.isDiagonal(Cell.C1, Cell.C3), is(false));
     }
