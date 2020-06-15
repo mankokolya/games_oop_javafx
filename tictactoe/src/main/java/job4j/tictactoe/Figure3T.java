@@ -2,6 +2,8 @@ package job4j.tictactoe;
 
 import javafx.scene.shape.Rectangle;
 
+import java.util.function.Predicate;
+
 public class Figure3T extends Rectangle {
     private boolean markX = false;
     private boolean markO = false;
@@ -15,8 +17,8 @@ public class Figure3T extends Rectangle {
     }
 
     public void take(boolean markX) {
-            this.markX = markX;
-            this.markO = !markX;
+        this.markX = markX;
+        this.markO = !markX;
     }
 
     public boolean hasMarkX() {
@@ -25,5 +27,9 @@ public class Figure3T extends Rectangle {
 
     public boolean hasMarkO() {
         return this.markO;
+    }
+
+    public boolean isEmpty() {
+        return !markX && !markO;
     }
 }
